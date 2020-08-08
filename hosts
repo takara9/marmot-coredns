@@ -1,0 +1,3 @@
+coredns    ansible_connection=local
+
+

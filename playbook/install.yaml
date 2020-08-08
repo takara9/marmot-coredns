@@ -1,0 +1,81 @@
+- name: basic information
+  hosts: all
+  gather_facts: true
+  become: true
+  #
+  vars:
+    my_host: coredns
+    my_domain: "{{ my_host }}.labs.local"
+    my_ipaddr: "{{ ansible_facts.enp0s9.ipv4.address }}"
+    my_data: /coredns
+    disk_sdc: "{{ my_data }}"
+  #   
+  roles:
+    - docker
+    - vdisks
+  # 
+  tasks:
+  - name: Install a list of packages
+    apt:
+      name: "{{ packages }}"
+      state: present
+      update_cache: yes
+    vars:
+      packages:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+  #
+  - debug: msg="{{ ansible_facts }}"
+  - debug: msg="{{ ansible_facts.enp0s9.ipv4.address }}"
+  - shell: |
+      mkdir cert
+      cd cert
+      openssl genrsa -out ca.key 4096
+      openssl req -x509 -new -nodes -sha512 -days 3650 \
+         -subj "/C=JP/ST=Tokyo/L=Tokyo/O=homelab/OU=homelab/CN={{ my_domain }}" \
+         -key ca.key \
+         -out ca.crt
+      openssl genrsa -out "{{ my_domain }}.key" 4096
+      touch ~/.rnd
+      openssl req -sha512 -new \
+         -subj "/C=JP/ST=Tokyo/L=Tokyo/O=homelab/OU=homelab/CN={{ my_domain }}" \
+         -key "{{ my_domain }}.key" \
+         -out "{{ my_domain }}.csr"
+      cat > v3.ext <<EOF
+        authorityKeyIdentifier=keyid,issuer
+        basicConstraints=CA:FALSE
+        keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+        extendedKeyUsage = serverAuth
+        subjectAltName = @alt_names
+        
+        [alt_names]
+        DNS.1="{{ my_domain }}"
+        DNS.2="{{ my_host }}"
+        IP.1="{{ my_ipaddr }}"
+      EOF
+      openssl x509 -req -sha512 -days 3650 \
+        -extfile v3.ext \
+        -CA ca.crt -CAkey ca.key -CAcreateserial \
+        -in "{{ my_domain }}.csr" \
+        -out "{{ my_domain }}.crt"
+      mkdir -p /data
+      mkdir -p /data/cert
+      cp "{{ my_domain }}.crt" /data/cert/
+      cp "{{ my_domain }}.key" /data/cert/
+      openssl x509 -inform PEM -in "{{ my_domain }}.crt" -out "{{ my_domain }}.cert"
+      mkdir -p "/etc/docker/certs.d/{{ my_domain }}"
+      cp "{{ my_domain }}.cert" "/etc/docker/certs.d/{{ my_domain }}"
+      cp "{{ my_domain }}.key" "/etc/docker/certs.d/{{ my_domain }}"
+      cp ca.crt "/etc/docker/certs.d/{{ my_domain }}"
+    args:
+      chdir: "{{ my_data }}"
+  #
+  - name: Re-Start dockerd
+    systemd:
+      name: docker
+      state: restarted
+      daemon_reload: yes
+      enabled: yes
+    
