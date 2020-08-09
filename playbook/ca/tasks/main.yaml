@@ -1,0 +1,8 @@
+#
+#- debug: msg="{{ ansible_facts }}"
+#- debug: msg="{{ ansible_facts.enp0s9.ipv4.address }}"
+- shell: |
+    ./setup_ca.sh
+    ./issue_certs.sh
+  args:
+      chdir: "{{ my_data }}"

@@ -6,4 +6,5 @@ hibiki              IN  A   192.168.1.31
 harbor              IN  A   192.168.1.71
 gitlab              IN  A   192.168.1.73
 jenkins             IN  A   192.168.1.85
+ca                  CNAME   dns
 
