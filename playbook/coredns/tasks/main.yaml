@@ -1,11 +1,3 @@
-- name: Re-Start dockerd
-  systemd:
-    name: docker
-    state: restarted
-    daemon_reload: yes
-    enabled: yes
-
-# 追加パッケージ導入
 - name: Install a list of packages
   apt:
     name: "{{ packages }}"
@@ -15,12 +7,33 @@
     packages:
     - curl
 
-- name: Configure CoreDNS Server
-  shell: |
-    docker pull coredns/coredns
-  args:
-    chdir: /coredns
-      
+- name: Downloading CoreDNS                                                                             
+  stat:                                                                                                 
+    path: /usr/local/bin/coredns
+  register: file_coredns_tgz                                                                            
+
+- get_url:
+    url: "https://github.com/coredns/coredns/releases/download/v{{ coredns_ver }}/coredns_{{ coredns_ver }}_linux_amd64.tgz"
+    dest: /tmp
+    mode: '0755'
+  when: file_coredns_tgz.stat.exists == false
+
+- name: Install coredns 
+  unarchive:
+    src: "/tmp/coredns_{{ coredns_ver }}_linux_amd64.tgz"
+    dest: /usr/local/bin
+    owner: root
+    group: root
+    mode: '0755'
+  
+- name: copy coredns.service
+  template:
+    src: coredns.service.j2
+    dest: /etc/systemd/system/coredns.service
+    owner: root
+    group: root
+    mode: '0644'
+
 - name: Stop dns proxy
   systemd:
     name: systemd-resolved
@@ -37,9 +50,15 @@
     
 - name: Configure CoreDNS Server
   shell: |
-    cp -r /vagrant/coredns/* /coredns
-    cp -r /vagrant/ca_bin/*  /coredns
-    ./start_coredns.sh
+    cp /vagrant/coredns/Corefile .
+    cp /vagrant/coredns/labs.db  .
   args:
     chdir: /coredns
+
+- name: Start Coredns deamons
+  systemd:
+    name: coredns
+    state: started
+    daemon_reload: yes
+    enabled: yes
 

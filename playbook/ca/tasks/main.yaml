@@ -1,8 +1,11 @@
-#
-#- debug: msg="{{ ansible_facts }}"
-#- debug: msg="{{ ansible_facts.enp0s9.ipv4.address }}"
+- name: Configure CA
+  shell: |
+    cp -r /vagrant/ca_bin/*  {{ my_ca_data }}
+  args:
+    chdir: "{{ my_ca_data }}"
+
 - shell: |
     ./setup_ca.sh
     ./issue_certs.sh
   args:
-      chdir: "{{ my_data }}"
+      chdir: "{{ my_ca_data }}"

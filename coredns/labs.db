@@ -2,9 +2,10 @@ labs.local.         IN  SOA dns.labs.local. root.labs.local. 2015082541 7200 360
 
 gw                  IN  A   192.168.1.1
 dns                 IN  A   192.168.1.254
+ca                  IN  A   192.168.1.254
 hibiki              IN  A   192.168.1.31
 harbor              IN  A   192.168.1.71
 gitlab              IN  A   192.168.1.73
 jenkins             IN  A   192.168.1.85
-ca                  CNAME   dns
+istio               IN  A   192.168.1.200
 

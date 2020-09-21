@@ -1,4 +1,4 @@
-- name: Git Repositorys Create a ext4 filesystem on /dev/sdb and check disk blocks
+- name: mkfs ext4
   filesystem:
     fstype: ext4
     dev: /dev/sdc
@@ -17,3 +17,24 @@
     src:  /dev/sdc
     fstype: ext4
     state: mounted
+
+- name: mkfs ext4
+  filesystem:
+    fstype: ext4
+    dev: /dev/sdd
+
+- name: Create mount point
+  file:
+    path: "{{ disk_sdd }}"
+    owner: root
+    group: root
+    mode: '2775'
+    state: directory
+    
+- name: Mount up device by /dev/sdd
+  mount:
+    path: "{{ disk_sdd }}"
+    src:  /dev/sdd
+    fstype: ext4
+    state: mounted
+    

@@ -5,13 +5,8 @@
 }
 
 labs.local:53 {
-    file /root/labs.db
+    file /coredns/labs.db
     log
     errors
 }
 
-example.com:53 {
-    file /root/example.db
-    log
-    errors
-}
