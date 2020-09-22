@@ -21,7 +21,7 @@
     - ca
     - nginx
 
-  tasks:
-    - debug: msg="{{ ansible_facts }}"
+  #tasks:
+  #  - debug: msg="{{ ansible_facts }}"
         
 

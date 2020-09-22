@@ -1,9 +1,43 @@
-- name: Configure CA
-  shell: |
-    cp -r /vagrant/ca_bin/*  {{ my_ca_data }}
-  args:
-    chdir: "{{ my_ca_data }}"
+- name: copy ca files create_csr.sh
+  template:
+    src: create_csr.sh
+    dest: "{{ my_ca_data }}"
+    owner: root
+    group: root
+    mode: '0755'
 
+- name: copy ca files environment
+  template:
+    src: environment
+    dest: "{{ my_ca_data }}"
+    owner: root
+    group: root
+    mode: '0644'
+    
+- name: copy ca files issue_certs.sh
+  template:
+    src: issue_certs.sh
+    dest: "{{ my_ca_data }}"
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: copy ca files setup_ca.sh
+  template:
+    src: setup_ca.sh
+    dest: "{{ my_ca_data }}"    
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: copy ca files signature_cert.sh
+  template:
+    src: signature_cert.sh
+    dest: "{{ my_ca_data }}"        
+    owner: root
+    group: root
+    mode: '0755'
+    
 - shell: |
     ./setup_ca.sh
     ./issue_certs.sh

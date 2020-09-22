@@ -1,0 +1,23 @@
+labs.local.   3600 IN  SOA dns.labs.local. root.labs.local. 2015082541 7200 3600 1209600 3600
+
+labs.local.	5  IN SOA ns1.labs.local. root.labs.local. (
+				16         ; serial
+				7200       ; refresh (4 hours)
+				3600       ; retry (1 hour)
+				604800     ; expire (1 week)
+				1800       ; minimum (30 min)
+				)
+
+gw              3600 IN  A     192.168.1.1
+hibiki          3600 IN  A     192.168.1.31
+harbor          3600 IN  A     192.168.1.71
+gitlab          3600 IN  A     192.168.1.73
+jenkins         3600 IN  A     192.168.1.85
+istio           3600 IN  A     192.168.1.139
+ingress         3600 IN  A     192.168.1.137
+dns             3600 IN  A     192.168.1.254
+ca              3600 IN  CNAME dns
+*.knative-apl   3600 IN  A     192.168.1.138
+raspi07         3600 IN  A     192.168.1.241
+raspi08         3600 IN  A     192.168.1.242
+helloworld-php  3600 IN  A     192.168.1.139
