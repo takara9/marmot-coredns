@@ -10,7 +10,7 @@ bridge_if = "en0: Wi-Fi (Wireless)"
 vm_spec = [
   { name: "coredns",
     cpu: 1,
-    memory: 512,
+    memory: 256,
     box: linux_os,
     private_ip: "172.16.20.254",
     public_ip: "192.168.1.254",

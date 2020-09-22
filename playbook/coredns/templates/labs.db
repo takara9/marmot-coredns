@@ -8,7 +8,7 @@ labs.local.	5  IN SOA ns1.labs.local. root.labs.local. (
 				1800       ; minimum (30 min)
 				)
 
-# Infra servers
+; Infra servers
 gw              3600 IN  A     192.168.1.1
 hibiki          3600 IN  A     192.168.1.31
 harbor          3600 IN  A     192.168.1.71
@@ -17,7 +17,7 @@ jenkins         3600 IN  A     192.168.1.85
 dns             3600 IN  A     192.168.1.254
 ca              3600 IN  CNAME dns
 
-# Kubernetes clusters
+; Kubernetes Cluster
 elb1            3600 IN  A     192.168.1.135
 elb2            3600 IN  A     192.168.1.136
 k8s             3600 IN  A     192.168.1.138
@@ -28,6 +28,6 @@ knative         3600 IN  CNAME istio
 *.knative-apl   3600 IN  A     192.168.1.138
 helloworld-php  3600 IN  A     192.168.1.139
 
-# Edge nodes
+; Edge nodes
 raspi07         3600 IN  A     192.168.1.241
 raspi08         3600 IN  A     192.168.1.242
