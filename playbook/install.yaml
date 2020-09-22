@@ -15,13 +15,9 @@
   #
   roles:
     - vdisks    
-    #- docker
-    #- coredns-container
     - coredns
     - ca
     - nginx
 
-  #tasks:
-  #  - debug: msg="{{ ansible_facts }}"
         
 
