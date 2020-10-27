@@ -4,13 +4,13 @@
 
 #ENV.store('VAGRANT_EXPERIMENTAL', 'disks') 
 linux_os = "ubuntu/bionic64"   # Ubuntu 18.04
-#linux_os = "bento/ubuntu-20.04"
+#linux_os = "ubuntu/focal64"  # Ubuntu 20.04
 bridge_if = "en0: Wi-Fi (Wireless)"
 
 vm_spec = [
   { name: "coredns",
     cpu: 1,
-    memory: 256,
+    memory: 512,
     box: linux_os,
     private_ip: "172.16.20.254",
     public_ip: "192.168.1.254",
@@ -57,7 +57,7 @@ Vagrant.configure("2") do |config|
 
       v.vm.provision "ansible_local" do |ansible|
         ansible.playbook       = "playbook/" + spec[:playbook]
-        ansible.install_mode   = "pip"
+        ansible.install_mode   = "pip3"
         #ansible.version        = "2.9.6"    
         ansible.verbose        = false
         ansible.install        = true

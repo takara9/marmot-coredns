@@ -2,15 +2,15 @@
   apt:
     name: "{{ packages }}"
     state: present
-    update_cache: yes
+    #update_cache: yes
   vars:
     packages:
     - curl
 
-- name: Downloading CoreDNS                                                                             
-  stat:                                                                                                 
+- name: Downloading CoreDNS
+  stat:
     path: /usr/local/bin/coredns
-  register: file_coredns_tgz                                                                            
+  register: file_coredns_tgz
 
 - get_url:
     url: "https://github.com/coredns/coredns/releases/download/v{{ coredns_ver }}/coredns_{{ coredns_ver }}_linux_amd64.tgz"

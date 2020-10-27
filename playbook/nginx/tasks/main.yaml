@@ -4,10 +4,10 @@
 ##  Docker のインストール
 - name: Add  GPG key
   apt_key: url=https://nginx.org/keys/nginx_signing.key
+
 - name: Add Docker APT repository
   apt_repository:
     repo: deb [arch=amd64] http://nginx.org/packages/ubuntu/ bionic nginx
-
     
 - name: Install a list of packages
   apt:
