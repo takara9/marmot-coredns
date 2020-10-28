@@ -1,6 +1,4 @@
-labs.local.   3600 IN  SOA dns.labs.local. root.labs.local. 2015082541 7200 3600 1209600 3600
-
-labs.local.	5  IN SOA ns1.labs.local. root.labs.local. (
+labs.local.	3600 IN SOA ns1.labs.local. root.labs.local. (
 				16         ; serial
 				7200       ; refresh (4 hours)
 				3600       ; retry (1 hour)
@@ -11,8 +9,8 @@ labs.local.	5  IN SOA ns1.labs.local. root.labs.local. (
 ; Infra Servers
 gw              3600 IN  A     192.168.1.1   ; BB Router
 hibiki          3600 IN  A     192.168.1.31  ; VM Host
-dns             3600 IN  A     192.168.1.254 ; This server CoreDNS
-ca              3600 IN  CNAME dns           ; Local CA
+ns1             3600 IN  A     192.168.1.254 ; This server CoreDNS
+ca              3600 IN  CNAME ns1           ; Local CA
 
 ;; CICD Servers
 harbor          3600 IN  A     192.168.1.71  ; Container Image Registry
