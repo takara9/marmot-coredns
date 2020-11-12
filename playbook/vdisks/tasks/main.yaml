@@ -1,7 +1,7 @@
 - name: mkfs ext4
   filesystem:
     fstype: ext4
-    dev: /dev/sdc
+    dev: "{{ disk1 }}"
 
 - name: Create mount point
   file:
@@ -11,17 +11,17 @@
     mode: '2775'
     state: directory
     
-- name: Mount up device by /dev/sdc
+- name: Mount up device by {{ disk1 }}
   mount:
     path: "{{ disk_sdc }}"
-    src:  /dev/sdc
+    src:  "{{ disk1 }}"
     fstype: ext4
     state: mounted
 
 - name: mkfs ext4
   filesystem:
     fstype: ext4
-    dev: /dev/sdd
+    dev: "{{ disk2 }}"
 
 - name: Create mount point
   file:
@@ -31,10 +31,10 @@
     mode: '2775'
     state: directory
     
-- name: Mount up device by /dev/sdd
+- name: Mount up device by {{ disk2 }}
   mount:
     path: "{{ disk_sdd }}"
-    src:  /dev/sdd
+    src:  "{{ disk2 }}"
     fstype: ext4
     state: mounted
     
