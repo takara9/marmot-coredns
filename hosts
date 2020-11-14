@@ -1,7 +1,11 @@
 coredns    ansible_connection=local
 
 [all:vars]
+
+# for Vagrant
 disk1 = /dev/sdc
-#disk1 = /dev/vdb
 disk2 = /dev/sdd
+
+# for KVM
+#disk1 = /dev/vdb
 #disk2 = /dev/vdc
