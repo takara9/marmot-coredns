@@ -12,8 +12,8 @@ vm_spec = [
     cpu: 1,
     memory: 512,
     box: linux_os,
-    private_ip: "172.16.20.254",
-    public_ip: "192.168.1.254",
+    private_ip: "172.16.10.220",
+    public_ip: "192.168.1.220",
     storage: [2,2], playbook: "install.yaml",
     comment: "coredns" },
 ]
