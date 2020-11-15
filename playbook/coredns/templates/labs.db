@@ -8,25 +8,22 @@ labs.local.	3600 IN SOA ns1.labs.local. root.labs.local. (
 
 ; Infra Servers
 gw              3600 IN  A     192.168.1.1   ; BB Router
-hibiki          3600 IN  A     192.168.1.31  ; VM Host
-ns1             3600 IN  A     192.168.1.254 ; This server CoreDNS
+ns1             3600 IN  A     192.168.1.220 ; This server CoreDNS
 ca              3600 IN  CNAME ns1           ; Local CA
 
 ;; CICD Servers
-harbor          3600 IN  A     192.168.1.71  ; Container Image Registry
-gitlab          3600 IN  A     192.168.1.73  ; Code Repository
-jenkins         3600 IN  A     192.168.1.85  ; CICD Server
+harbor          3600 IN  A     192.168.1.221 ; Container Image Registry
+gitlab          3600 IN  A     192.168.1.222 ; Code Repository
+jenkins         3600 IN  A     192.168.1.223  ; CICD Server
 
 ; K8s-1 Nodes 
-elb1            3600 IN  A     192.168.1.135 ; External LoadBalancer 1
-elb2            3600 IN  A     192.168.1.136 ; External LoadBalancer 2
-k8s             3600 IN  A     192.168.1.138 ; K8s API Endpoint as VIP
-nodeport        3600 IN  CNAME k8s           ; NodePort VIP
-ingress         3600 IN  CNAME k8s           ; Ingress VIP
-istio           3600 IN  A     192.168.1.139 ; Istio Ingress-Gatway VIP
+k8s-api         3600 IN  A     192.168.1.63  ; K8s API Endpoint as VIP
+nodeport        3600 IN  CNAME k8s-api       ; NodePort VIP
+ingress         3600 IN  CNAME k8s-api       ; Ingress VIP
+istio           3600 IN  A     192.168.1.64  ; Istio Ingress-Gatway VIP
 knative         3600 IN  CNAME istio         ; Knative Endpoint
-*.knative-apl   3600 IN  CNAME k8s           ; Sub-domain for Knative 
-helloworld-php  3600 IN  CBANE k8s           ; Sample Application
+*.knative-apl   3600 IN  CNAME istio         ; Sub-domain for Knative 
+helloworld-php  3600 IN  CBANE k8s-api       ; Sample Application
 
 ; Edge Nodes
 raspi07         3600 IN  A     192.168.1.241 ; Edge Node 1
