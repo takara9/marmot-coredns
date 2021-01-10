@@ -1,4 +1,4 @@
-labs.local.	3600 IN SOA ns1.labs.local. root.labs.local. (
+labo.local.	3600 IN SOA ns1.labs.local. root.labs.local. (
 				16         ; serial
 				7200       ; refresh (4 hours)
 				3600       ; retry (1 hour)

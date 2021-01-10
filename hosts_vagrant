@@ -6,6 +6,3 @@ coredns    ansible_connection=local
 disk1 = /dev/sdc
 disk2 = /dev/sdd
 
-# for KVM
-#disk1 = /dev/vdb
-#disk2 = /dev/vdc

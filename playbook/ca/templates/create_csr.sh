@@ -53,7 +53,7 @@ EOF
     
     cat > "${WORK_HOME}/info.txt" <<EOF
 MY_HOST=${MY_HOST}
-MY_DOMAIN=${MY_HOST}.labs.local
+MY_DOMAIN=${MY_HOST}.labo.local
 MY_IPADDR=${MY_IPADDR}
 EOF
 

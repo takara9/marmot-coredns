@@ -42,10 +42,10 @@
     group: root
     mode: '0644'
 
-- name: copy zone file labs.db
+- name: copy zone file labo.db
   template:
-    src: labs.db
-    dest: /coredns/labs.db
+    src: labo.db
+    dest: /coredns/labo.db
     owner: root
     group: root
     mode: '0644'
