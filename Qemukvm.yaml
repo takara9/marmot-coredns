@@ -25,13 +25,13 @@ cluster_name: core
 vm_spec:
   - name: "coredns"
     cpu: 1
-    memory: 512
+    memory: 1024
     private_ip:  "172.16.10.220"
     public_ip:   "10.0.0.220"
     storage:
     - 2
     - 2
     playbook: install.yaml
-    vm_host: nagato    
+    vm_host: auto    
     comment: "Name Server"
 
