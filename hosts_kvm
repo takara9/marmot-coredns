@@ -1,4 +1,4 @@
-coredns    ansible_connection=local
+coredns     ansible_connection=local
 
 [all:vars]
 
