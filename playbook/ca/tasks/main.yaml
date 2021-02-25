@@ -37,9 +37,19 @@
     owner: root
     group: root
     mode: '0755'
-    
+
+- name: copy ca files cp_ca_htdocs.sh
+  template:
+    src: cp_ca_htdocs.sh
+    dest: "{{ my_ca_data }}"    
+    owner: root
+    group: root
+    mode: '0755'
+
+
 - shell: |
     ./setup_ca.sh
     ./issue_certs.sh
+    ./cp_ca_htdocs.sh
   args:
       chdir: "{{ my_ca_data }}"
