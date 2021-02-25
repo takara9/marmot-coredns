@@ -1,30 +1,47 @@
-labo.local.	3600 IN SOA ns1.labs.local. root.labs.local. (
-				16         ; serial
+labo.local.	3600 IN SOA ns1.labo.local. root.labo.local. (
+				27         ; serial
 				7200       ; refresh (4 hours)
 				3600       ; retry (1 hour)
 				604800     ; expire (1 week)
 				1800       ; minimum (30 min)
 				)
 
+; Hypervisors
+hibiki          3600 IN  A     192.168.1.31
+akatsuki        3600 IN  A     192.168.1.32
+yukikaze        3600 IN  A     192.168.1.33
+nagato          3600 IN  A     192.168.1.34
+aoba            3600 IN  A     192.168.1.35
+hmc             3600 IN  A     192.168.1.36  ; Hypervisor management console
+
+
 ; Infra Servers
-gw              3600 IN  A     192.168.1.1   ; BB Router
-ns1             3600 IN  A     192.168.1.220 ; This server CoreDNS
-ca              3600 IN  CNAME ns1           ; Local CA
+ns1             3600 IN  A     192.168.1.241 ; This server CoreDNS
+;ca              3600 IN  CNAME ns1           ; Local CA
 
 ;; CICD Servers
+;harbor          3600 IN  A     10.0.0.221    ; Container Image Registry
+;gitlab          3600 IN  A     10.0.0.222    ; Code Repository
+;jenkins         3600 IN  A     10.0.0.223    ; CICD Server
+
+;; CICD Server tiny env
+ca              3600 IN  A     192.168.1.220 ; CA Server
 harbor          3600 IN  A     192.168.1.221 ; Container Image Registry
 gitlab          3600 IN  A     192.168.1.222 ; Code Repository
-jenkins         3600 IN  A     192.168.1.223  ; CICD Server
+jenkins         3600 IN  A     192.168.1.223 ; CICD Server
 
-; K8s-1 Nodes 
-k8s-api         3600 IN  A     192.168.1.63  ; K8s API Endpoint as VIP
-nodeport        3600 IN  CNAME k8s-api       ; NodePort VIP
-ingress         3600 IN  CNAME k8s-api       ; Ingress VIP
-istio           3600 IN  A     192.168.1.64  ; Istio Ingress-Gatway VIP
-knative         3600 IN  CNAME istio         ; Knative Endpoint
-*.knative-apl   3600 IN  CNAME istio         ; Sub-domain for Knative 
-helloworld-php  3600 IN  CBANE k8s-api       ; Sample Application
 
 ; Edge Nodes
 raspi07         3600 IN  A     192.168.1.241 ; Edge Node 1
 raspi08         3600 IN  A     192.168.1.242 ; Edge Node 2
+
+; Istio Ingress Gateway
+igw3            3600 IN  A     10.0.3.42
+svc1            3600 IN  CNAME igw3          ; Istio apl #1
+svc2            3600 IN  CNAME igw3          ; Istio apl #2
+svc3            3600 IN  CNAME igw3          ; Istio apl #2
+svc4            3600 IN  CNAME igw3          ; for Multilayer App
+
+; OAuth Server
+oauth           3600 IN  A     10.0.2.83 
+

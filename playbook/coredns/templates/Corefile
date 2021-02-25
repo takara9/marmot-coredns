@@ -10,4 +10,26 @@ labo.local:53 {
     errors
 }
 
+k8s2.labo.local:53 {
+    log
+    errors
+    forward . 10.0.2.22
+}
 
+k8s1.labo.local:53 {
+    log
+    errors
+    forward . 192.168.1.122
+}
+
+k8s3.labo.local:53 {
+    log
+    errors
+    forward . 10.0.3.30
+}
+
+k8s4.labo.local:53 {
+    log
+    errors
+    forward . 192.168.1.90
+}
