@@ -18,25 +18,26 @@
 ##
 echo 証明書署名要求（CSR）作成
 echo MY_HOST: $MY_HOST
-echo MY_DOMAIN: $MY_DOMAIN
+echo FQDN: $FQDN
+export MY_IPADDR=$(nslookup $FQDN | grep Address: | awk 'NR>1 {print $2}')
 echo MY_IPADDR: $MY_IPADDR
 echo CSR_SUBJ: $CSR_SUBJ
 
-WORK_HOME=$CRT_HOME/$MY_DOMAIN
+WORK_HOME=$CRT_HOME/$FQDN
 
 if [ ! -d $WORK_HOME ]; then
     mkdir -p $WORK_HOME
 fi
 
-if [ -f "${WORK_HOME}/${MY_DOMAIN}.csr" ]; then
+if [ -f "${WORK_HOME}/${FQDN}.csr" ]; then
     echo "CSRは作成済みです"
     exit 1
 else
-    openssl genrsa -out "${WORK_HOME}/${MY_DOMAIN}.key" 4096
+    openssl genrsa -out "${WORK_HOME}/${FQDN}.key" 4096
     openssl req -sha512 -new \
         -subj $CSR_SUBJ \
-        -key "${WORK_HOME}/${MY_DOMAIN}.key" \
-        -out "${WORK_HOME}/${MY_DOMAIN}.csr" 
+        -key "${WORK_HOME}/${FQDN}.key" \
+        -out "${WORK_HOME}/${FQDN}.csr" 
 
     cat > "${WORK_HOME}/v3.ext" <<EOF
 authorityKeyIdentifier=keyid,issuer
@@ -46,14 +47,14 @@ extendedKeyUsage = serverAuth
 subjectAltName = @alt_names
 
 [alt_names]
-DNS.1=$MY_DOMAIN
+DNS.1=$FQDN
 DNS.2=$MY_HOST
 IP.1=$MY_IPADDR
 EOF
     
     cat > "${WORK_HOME}/info.txt" <<EOF
 MY_HOST=${MY_HOST}
-MY_DOMAIN=${MY_HOST}.labo.local
+FQDN=${MY_HOST}.${MY_DOMAIN}
 MY_IPADDR=${MY_IPADDR}
 EOF
 

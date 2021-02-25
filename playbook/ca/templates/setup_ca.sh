@@ -11,7 +11,7 @@
 # L   市区町村名     例 Nihonbash,Hakozaki-cho,Chuo-ku
 # ST  都道府県名     例 Tokyo
 # C   国             例 JP
-CA_SUBJ="/C=JP/ST=Tokyo/L=Nihonbash/OU=Labo/O=Private CA/CN=ca.labo.local"
+CA_SUBJ="/C=JP/ST=Tokyo/OU=Private CA/O=HomeLabo/CN=ca.labo.local"
 
 #
 # 認証局の開設時のみ必要
