@@ -26,6 +26,8 @@ else
 	    -inkey "${WORK_HOME}/${FQDN}.key" \
 	    -passin pass:root \
 	    -passout pass:root
+
+    chmod a+r "${WORK_HOME}/${FQDN}.key"
 fi
 
 
