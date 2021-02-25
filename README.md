@@ -1,5 +1,11 @@
 # Marmot CoreDNS VM上でCoreDNSを構築するAnsibleプレイブック
 
+* CoreDNS
+* プライベート認証局
+* メールサーバー
+
+
+
 ## 概要
 
 これはLinuxの QEMU/KVM または Vagrant でCoreDNSサーバーを構成するAnsibleコードです。
