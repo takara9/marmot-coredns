@@ -35,3 +35,4 @@ openssl req -text -noout -in "${WORK_HOME}/${FQDN}.csr" > "${WORK_HOME}/${FQDN}_
 openssl x509 -text -fingerprint -noout -in "${WORK_HOME}/${FQDN}.crt" >  "${WORK_HOME}/${FQDN}_cert.txt"
 
 
+

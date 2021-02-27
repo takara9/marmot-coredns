@@ -1,5 +1,5 @@
 - name: copy ca files create_csr.sh
-  template:
+  copy:
     src: create_csr.sh
     dest: "{{ my_ca_data }}"
     owner: root
@@ -7,7 +7,7 @@
     mode: '0755'
 
 - name: copy ca files environment
-  template:
+  copy:
     src: environment
     dest: "{{ my_ca_data }}"
     owner: root
@@ -15,7 +15,7 @@
     mode: '0644'
     
 - name: copy ca files issue_certs.sh
-  template:
+  copy:
     src: issue_certs.sh
     dest: "{{ my_ca_data }}"
     owner: root
@@ -23,7 +23,7 @@
     mode: '0755'
 
 - name: copy ca files setup_ca.sh
-  template:
+  copy:
     src: setup_ca.sh
     dest: "{{ my_ca_data }}"    
     owner: root
@@ -31,7 +31,7 @@
     mode: '0755'
 
 - name: copy ca files signature_cert.sh
-  template:
+  copy:
     src: signature_cert.sh
     dest: "{{ my_ca_data }}"        
     owner: root
@@ -39,7 +39,7 @@
     mode: '0755'
 
 - name: copy ca files cp_ca_htdocs.sh
-  template:
+  copy:
     src: cp_ca_htdocs.sh
     dest: "{{ my_ca_data }}"    
     owner: root
@@ -50,6 +50,6 @@
 - shell: |
     ./setup_ca.sh
     ./issue_certs.sh
-    ./cp_ca_htdocs.sh
+    #./cp_ca_htdocs.sh
   args:
       chdir: "{{ my_ca_data }}"
