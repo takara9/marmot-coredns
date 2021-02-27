@@ -29,6 +29,13 @@ if [ ! -d $WORK_HOME ]; then
     mkdir -p $WORK_HOME
 fi
 
+##
+## X509 V3 certificate extension configuration format
+##   https://www.openssl.org/docs/manmaster/man5/x509v3_config.html
+##
+
+
+
 if [ -f "${WORK_HOME}/${FQDN}.csr" ]; then
     echo "CSRは作成済みです"
     exit 1
@@ -39,13 +46,7 @@ else
         -key "${WORK_HOME}/${FQDN}.key" \
         -out "${WORK_HOME}/${FQDN}.csr" 
 
-    cat > "${WORK_HOME}/v3.ext" <<EOF
-authorityKeyIdentifier=keyid,issuer
-basicConstraints=CA:FALSE
-keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
-extendedKeyUsage = serverAuth
-subjectAltName = @alt_names
-
+    cat >> "${WORK_HOME}/${V3EXT}" <<EOF
 [alt_names]
 DNS.1=$FQDN
 DNS.2=$MY_HOST

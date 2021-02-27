@@ -1,3 +1,36 @@
+- name: copy v3ext file to "{{ my_ca_data }}"
+  copy:
+    src:  v3ext_ca.txt
+    dest: "{{ my_ca_data }}"
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: copy v3ext file to "{{ my_ca_data }}"
+  copy:
+    src:  v3ext_ca.txt
+    dest: "{{ my_ca_data }}"
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: copy v3ext file to "{{ my_ca_data }}"
+  copy:
+    src:  v3ext_harbor.txt
+    dest: "{{ my_ca_data }}"
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: copy v3ext file to "{{ my_ca_data }}"
+  copy:
+    src:  v3ext_jenkins.txt
+    dest: "{{ my_ca_data }}"
+    owner: root
+    group: root
+    mode: '0755'
+
+
 - name: copy ca files create_csr.sh
   copy:
     src: create_csr.sh
