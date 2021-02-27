@@ -16,6 +16,7 @@
 ##
 ## 証明書署名要求(CSR) 作成
 ##
+echo "**************************"
 echo 証明書署名要求（CSR）作成
 echo MY_HOST: $MY_HOST
 echo FQDN: $FQDN
@@ -35,18 +36,18 @@ fi
 ##
 
 
-
 if [ -f "${WORK_HOME}/${FQDN}.csr" ]; then
     echo "CSRは作成済みです"
     exit 1
 else
     openssl genrsa -out "${WORK_HOME}/${FQDN}.key" 4096
     openssl req -sha512 -new \
-        -subj $CSR_SUBJ \
+        -subj "${CSR_SUBJ}" \
         -key "${WORK_HOME}/${FQDN}.key" \
         -out "${WORK_HOME}/${FQDN}.csr" 
 
-    cat >> "${WORK_HOME}/${V3EXT}" <<EOF
+    cp "${V3EXT}" "${WORK_HOME}/v3ext" 
+    cat >> "${WORK_HOME}/v3ext" <<EOF
 [alt_names]
 DNS.1=$FQDN
 DNS.2=$MY_HOST
@@ -61,4 +62,6 @@ EOF
 
 fi
 
+
+echo "**************************"
     
