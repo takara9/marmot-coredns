@@ -1,3 +1,11 @@
+- name: Install a list of packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - rand
+
 - name: copy v3ext file to "{{ my_ca_data }}"
   copy:
     src:  v3ext_ca.txt

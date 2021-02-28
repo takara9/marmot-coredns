@@ -10,15 +10,19 @@ WORK_HOME=$CRT_HOME/$FQDN
 echo "サーバー証明書 署名"
 echo FQDN: $FQDN
 
+if [ ! -f "${WORK_HOME}/${FQDN}.serial" ]; then
+    openssl rand -hex 10 > "${WORK_HOME}/${FQDN}.serial"
+fi
 
 if [ -f "${WORK_HOME}/${FQDN}.crt" ]; then
     echo "証明書は作成済みです"
 else
     openssl x509 -req -sha512 -days 825 \
-        -extfile "${WORK_HOME}/v3ext" \
-        -CA "${CA_HOME}/ca.crt" -CAkey "${CA_HOME}/ca.key" -CAcreateserial \
-        -in "${WORK_HOME}/${FQDN}.csr" \
-        -out "${WORK_HOME}/${FQDN}.crt"
+            -extfile "${WORK_HOME}/v3ext" \
+	    -CAserial "${WORK_HOME}/${FQDN}.serial" \
+            -CA "${CA_HOME}/ca.crt" -CAkey "${CA_HOME}/ca.key" \
+            -in "${WORK_HOME}/${FQDN}.csr" \
+            -out "${WORK_HOME}/${FQDN}.crt"
 
     openssl pkcs12 -export \
 	    -out "${WORK_HOME}/${FQDN}.p12" \
