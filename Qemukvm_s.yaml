@@ -11,7 +11,7 @@ private_ip_subnet: 172.16.0.0/16
 public_ip_subnet:  192.168.1.0/24
 
 public_ip_gw:  192.168.1.1
-public_ip_dns: 192.168.1.241
+public_ip_dns: 192.168.1.1
 
 ### Network device and config
 net_dev_default: enp1s0
@@ -23,12 +23,13 @@ cluster_name: core
 
 ### Virtual Machine Spec
 vm_spec:
-  - name: "coredns"
+  - name: "yellopages"
     cpu: 1
     memory: 1024
-    private_ip:  "172.16.10.220"
-    public_ip:   "192.168.1.220"
+    private_ip:  "172.16.10.204"
+    public_ip:   "192.168.1.204"
     storage:
+    - 2
     - 2
     - 2
     playbook: install.yaml

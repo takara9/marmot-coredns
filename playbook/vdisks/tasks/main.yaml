@@ -18,6 +18,8 @@
     fstype: ext4
     state: mounted
 
+
+
 - name: mkfs ext4
   filesystem:
     fstype: ext4
@@ -37,4 +39,26 @@
     src:  "{{ disk2 }}"
     fstype: ext4
     state: mounted
+
+
+
+- name: mkfs ext4
+  filesystem:
+    fstype: ext4
+    dev: "{{ disk3 }}"
+
+- name: Create mount point
+  file:
+    path: "{{ disk_sde }}"
+    owner: root
+    group: root
+    mode: '2775'
+    state: directory
     
+- name: Mount up device by {{ disk3 }}
+  mount:
+    path: "{{ disk_sde }}"
+    src:  "{{ disk3 }}"
+    fstype: ext4
+    state: mounted
+

@@ -11,13 +11,17 @@
     disk_sdc: "{{ my_dns_data }}"
     my_ca_data: /ca
     disk_sdd: "{{ my_ca_data }}"
-    coredns_ver: 1.7.0    
+    coredns_ver: 1.7.0
+    my_ldap_data: /ldap
+    disk_sde: "{{ my_ldap_data }}"
   #
   roles:
     - vdisks    
     - coredns
     - ca
-    - nginx
+    - nginx    
+    - ldap    
+
 
         
 

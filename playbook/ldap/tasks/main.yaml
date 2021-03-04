@@ -1,0 +1,28 @@
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+
+- name: Install a list of packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - php
+    - slapd
+    - ldap-utils
+    - php-ldap
+    - php-xml
+    - php-fpm
+
+- name: Install phpLDAPadmin
+  shell: |
+    git clone https://github.com/breisig/phpLDAPadmin
+    cd phpLDAPadmin/config
+    cp config.php.example config.php
+  args:
+      chdir: "{{ my_ldap_data }}"
+
+
+
+
