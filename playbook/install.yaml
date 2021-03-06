@@ -16,11 +16,12 @@
     disk_sde: "{{ my_ldap_data }}"
   #
   roles:
-    - vdisks    
+    - vdisks
     - coredns
     - ca
-    - nginx    
-    - ldap    
+    - nginx
+    #- ldap
+    - ldap2
 
 
         

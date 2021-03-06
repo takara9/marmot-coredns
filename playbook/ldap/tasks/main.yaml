@@ -15,6 +15,30 @@
     - php-xml
     - php-fpm
 
+
+
+- name: Install phpLDAPadmin
+  shell: |
+    NEW_PWD=secret
+    PWD_HASH=$(slappasswd -s ${NEW_PWD})
+    echo $PWD_HASH
+  register: PWD_HASH
+
+- name: copy ldif
+  template:
+    src: passwd.ldif.j2
+    dest: "{{ my_ldap_data }}/passwd.ldif"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install phpLDAPadmin
+  shell: |
+    ldapmodify -Y EXTERNAL -H ldapi:/// -f passwd.ldif
+  args:
+    chdir: "{{ my_ldap_data }}"
+
+
 - name: Install phpLDAPadmin
   shell: |
     git clone https://github.com/breisig/phpLDAPadmin
@@ -23,6 +47,18 @@
   args:
       chdir: "{{ my_ldap_data }}"
 
+- name: change socket addr
+  replace: >-
+    dest='/etc/php/7.2/fpm/pool.d/www.conf'
+    regexp='^listen = /run/php/php7.2-fpm.sock'
+    replace='listen = 127.0.0.1:9000'
+
+- name: restart php7.2-fpm
+  systemd:
+    name: php7.2-fpm
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
 
 
 
