@@ -15,7 +15,9 @@
     - php-ldap
     - php-xml
     - php-fpm
-
+    - libsasl2-dev
+    - libltdl-dev
+    - libgnutls28-dev
 #
 # OpenLDAP のソースコード取得
 #
@@ -52,7 +54,7 @@
 #
 - name: configure 
   shell: |
-      ./configure --prefix=/ldap
+      ./configure --prefix=/ldap --enable-spasswd --enable-slapi --with-tls
   args:
       chdir: "{{ my_ldap_data }}/openldap-2.4.57"
 - name: make depend
@@ -130,6 +132,11 @@
     mode: '0755'
 
 #########
+- name: copy README.md
+  copy:
+    src:  README.md
+    dest: /ldap/ldif/
+
 - name: copy org.ldif
   copy:
     src:  org.ldif
