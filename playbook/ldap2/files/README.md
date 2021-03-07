@@ -24,10 +24,16 @@ ldapadd -x -D "cn=Manager,dc=labo,dc=local" -W -f org.ldif
 
 
 
-登録の結果の確認
+## 登録の結果の確認
 
 ldapsearch -x -b 'dc=labo,dc=local' '(objectclass=*)'
+ldapsearch -x -H ldaps://ldab.labo.local  -b 'dc=labo,dc=local' '(objectclass=*)'
 
+
+## 参考資料
+* [slapd-config(5) — Linux manual page](https://man7.org/linux/man-pages/man5/slapd-config.5.html)
+* [OpenLDAP Software 2.4 Administrator's Guide](https://www.openldap.org/doc/admin24/index.html)
+* [5. Configuring slapd](https://www.openldap.org/doc/admin24/slapdconf2.html#Configuration%20Example)
 
 
 
