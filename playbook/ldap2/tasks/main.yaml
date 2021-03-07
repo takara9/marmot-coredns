@@ -15,18 +15,20 @@
     - php-ldap
     - php-xml
     - php-fpm
-    #- slapd
-    #- ldap-utils
 
-
+#
+# OpenLDAP のソースコード取得
+#
 - name: Download OpenLdap
   get_url:
     url:  https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.57.tgz
     dest: "{{ my_ldap_data }}"
     mode: 0440
 
-
-- name: Un arcvhice OpenLdap
+#
+# OpenLDAP コードを展開
+#
+- name: Unarcvhice OpenLdap
   unarchive:
     src:  "{{ my_ldap_data }}/openldap-2.4.57.tgz"
     dest: "{{ my_ldap_data }}"
@@ -34,6 +36,9 @@
     group: root
     mode: '0755'
 
+#
+# データ用ディレクトリ作成
+#
 - name: create slapd.d
   file:
     state: directory
@@ -42,28 +47,24 @@
     group: root
     mode: '0755'
 
-
+#
+# OpenLDAP をビルド
+#
 - name: configure 
   shell: |
       ./configure --prefix=/ldap
   args:
       chdir: "{{ my_ldap_data }}/openldap-2.4.57"
-
-
 - name: make depend
   shell: |
       make depend
   args:
       chdir: "{{ my_ldap_data }}/openldap-2.4.57"
-
-
 - name: make install
   shell: |
       make install
   args:
       chdir: "{{ my_ldap_data }}/openldap-2.4.57"
-
-
 - name: create symbolic link
   shell: |
      ls /ldap/bin > /tmp/ldap_command_list
@@ -74,12 +75,36 @@
   args:
       chdir: /usr/local/bin
 
+#
+# OpenLDAPの設定ファイルをコピー　（こっちは未使用）
+#
+- name: copy slapd.conf
+  template:
+    src: slapd.conf
+    dest: /ldap/etc/openldap/slapd.conf
+    owner: root
+    group: root
+    mode: '0600'
 
+#
+# OpenLDAPのLDIFファイルをコピー（こちらを使用）
+#   データをDBへロード
+#
+- name: copy slapd.ldif
+  template:
+    src: slapd.ldif
+    dest: /ldap/etc/openldap/slapd.ldif
+    owner: root
+    group: root
+    mode: '0600'
 - name: create symbolic link
   shell: |
-    /usr/local/sbin/slapadd -n 0 -F /ldap/etc/slapd.d -l /ldap/etc/openldap/slapd.ldif
+    /ldap/sbin/slapadd -n 0 -F /ldap/etc/slapd.d -l /ldap/etc/openldap/slapd.ldif
 
 
+#
+# systemd の設定と開始
+#
 - name: copy slapd.service
   template:
     src: slapd.service
@@ -87,37 +112,71 @@
     owner: root
     group: root
     mode: '0644'
-
-
 - systemd:
     name:  slapd
     state: started
     daemon_reload: yes
     enabled: yes
 
-
-- name: Install phpLDAPadmin
-  shell: |
-    NEW_PWD=secret
-    PWD_HASH=$(slappasswd -s ${NEW_PWD})
-    echo $PWD_HASH
-  register: PWD_HASH
-
-- name: copy ldif
-  template:
-    src: passwd.ldif.j2
-    dest: "{{ my_ldap_data }}/passwd.ldif"
+#
+# LDAP初期設定実施
+#
+- name: create ldif directory
+  file:
+    state: directory
+    path: /ldap/ldif
     owner: root
     group: root
-    mode: 0644
+    mode: '0755'
 
-- name: Install phpLDAPadmin
-  shell: |
-    ldapmodify -Y EXTERNAL -H ldapi:/// -f passwd.ldif
+#########
+- name: copy org.ldif
+  copy:
+    src:  org.ldif
+    dest: /ldap/ldif/
+- command: ldapadd -x -w secret -D "cn=Manager,dc=labo,dc=local" -f org.ldif
   args:
-    chdir: "{{ my_ldap_data }}"
+    chdir: /ldap/ldif
+
+- name: copy org-unit.ldif
+  copy:
+    src:  org-unit.ldif
+    dest: /ldap/ldif/
+- command: ldapadd -x -w secret -D "cn=Manager,dc=labo,dc=local" -f org-unit.ldif
+  args:
+    chdir: /ldap/ldif
+
+- name: copy user1.ldif 
+  copy:
+    src:  user1.ldif 
+    dest: /ldap/ldif/
+- command: ldapadd -x -w secret -D "cn=Manager,dc=labo,dc=local" -f user1.ldif 
+  args:
+    chdir: /ldap/ldif
+
+- name: copy user2.ldif 
+  copy:
+    src:  user2.ldif 
+    dest: /ldap/ldif/
+- command: ldapadd -x -w secret -D "cn=Manager,dc=labo,dc=local" -f user2.ldif 
+  args:
+    chdir: /ldap/ldif
+
+- name: copy user3.ldif 
+  copy:
+    src:  user3.ldif 
+    dest: /ldap/ldif/
+- command: ldapadd -x -w secret -D "cn=Manager,dc=labo,dc=local" -f user3.ldif 
+  args:
+    chdir: /ldap/ldif
 
 
+#########
+
+
+#
+# phpLDAPadminのインストール
+#
 - name: Install phpLDAPadmin
   shell: |
     git clone https://github.com/breisig/phpLDAPadmin
@@ -126,12 +185,15 @@
   args:
       chdir: "{{ my_ldap_data }}"
 
+
+#
+# 設定変更とPHP実行環境の再スタート
+#
 - name: change socket addr
   replace: >-
     dest='/etc/php/7.2/fpm/pool.d/www.conf'
     regexp='^listen = /run/php/php7.2-fpm.sock'
     replace='listen = 127.0.0.1:9000'
-
 - name: restart php7.2-fpm
   systemd:
     name: php7.2-fpm

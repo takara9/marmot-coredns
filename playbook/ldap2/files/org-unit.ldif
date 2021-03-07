@@ -1,0 +1,6 @@
+dn: ou=people,dc=labo,dc=local
+objectclass: top
+objectclass: organizationalUnit
+ou: people
+description: Fictional organizational unit for example purposes
+

@@ -1,0 +1,11 @@
+dn: uid=sato,ou=people,dc=labo,dc=local
+changetype: add
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+uid: sato
+cn: Haruto Sato
+sn: sato
+o: people
+userPassword: {SSHA}wvxuaDL+/m3phJE6fyrtGU8UODCfjA2i

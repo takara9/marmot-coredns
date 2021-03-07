@@ -3,7 +3,7 @@ Description=Slapd
 Documentation=https://www.openldap.org/doc
 
 [Service]
-ExecStart=/ldap/libexec/slapd -F /ldap/etc/slapd.d
+ExecStart=/ldap/libexec/slapd -F /ldap/etc/slapd.d 
 Restart=on-failure
 RestartSec=5
 Type=forking

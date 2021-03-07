@@ -1,0 +1,10 @@
+dn: uid=takahashi,ou=people,dc=labo,dc=local
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+uid: takahashi
+cn: Takuya Takahashi
+sn: takuya
+o: people
+userPassword: {SSHA}wvxuaDL+/m3phJE6fyrtGU8UODCfjA2i
