@@ -43,3 +43,11 @@ export V3EXT=v3ext_ldap.txt
 ./signature_cert.sh
 
 
+export MY_HOST=sso
+export FQDN=$MY_HOST.$MY_DOMAIN
+export CSR_SUBJ="/C=JP/ST=Tokyo/OU=Directory Service/O=Home Labo/CN=$FQDN"
+export V3EXT=v3ext_sso.txt
+./create_csr_noip.sh
+./signature_cert.sh
+
+
