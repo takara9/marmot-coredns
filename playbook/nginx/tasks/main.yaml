@@ -35,6 +35,15 @@
     mode: '0644'
 
 
+- name: sso web page config
+  template:
+    src: sso.conf
+    dest: /etc/nginx/conf.d/sso.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+
 - name: remove /etc/nginx/conf.d/default.conf
   file:
     state: absent

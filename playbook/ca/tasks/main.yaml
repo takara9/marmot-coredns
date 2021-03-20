@@ -7,9 +7,6 @@
     - rand
 
 
-
-
-
 - name: copy v3ext file to "{{ my_ca_data }}"
   copy:
     src:  v3ext_ca.txt
@@ -51,11 +48,27 @@
     group: root
     mode: '0755'
 
+- name: copy v3ext file to "{{ my_ca_data }}"
+  copy:
+    src:  v3ext_sso.txt
+    dest: "{{ my_ca_data }}"
+    owner: root
+    group: root
+    mode: '0755'
+
 
 
 - name: copy ca files create_csr.sh
   copy:
     src: create_csr.sh
+    dest: "{{ my_ca_data }}"
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: copy ca files create_csr.sh
+  copy:
+    src: create_csr_noip.sh
     dest: "{{ my_ca_data }}"
     owner: root
     group: root
@@ -132,9 +145,9 @@
 # 既存の証明書がない場合は、新たに展開
 #
 - shell: |
-    ./setup_ca.sh
+    #./setup_ca.sh
     ./issue_certs.sh
-    ./cp_ca_htdocs.sh
+    #./cp_ca_htdocs.sh
   args:
       chdir: "{{ my_ca_data }}"
-  when: certs_tgz.stat.exists == false
+##  when: certs_tgz.stat.exists == false
