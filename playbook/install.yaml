@@ -20,12 +20,11 @@
   #
   roles:
     - vdisks
-    - docker    
     - coredns
     - ca
     - nginx
     - ldap2
-
+    - docker
 
         
 
