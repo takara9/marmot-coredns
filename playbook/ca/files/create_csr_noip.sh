@@ -20,8 +20,8 @@ echo "**************************"
 echo 証明書署名要求（CSR）作成
 echo MY_HOST: $MY_HOST
 echo FQDN: $FQDN
-export MY_IPADDR=$(nslookup $FQDN | grep Address: | awk 'NR>1 {print $2}')
-echo MY_IPADDR: $MY_IPADDR
+#export MY_IPADDR=$(nslookup $FQDN | grep Address: | awk 'NR>1 {print $2}')
+#echo MY_IPADDR: $MY_IPADDR
 echo CSR_SUBJ: $CSR_SUBJ
 
 WORK_HOME=$CRT_HOME/$FQDN
@@ -55,7 +55,7 @@ EOF
     
     cat > "${WORK_HOME}/info.txt" <<EOF
 MY_HOST=${MY_HOST}
-FQDN=${MY_HOST}.${MY_DOMAIN}
+FQDN=${FQDN}
 EOF
 
 fi
