@@ -1,7 +1,7 @@
 #
 # 最小構成のK8sクラスタ
 #
-domain: labs.local
+domain: labo.local
 
 ## Hypervisor type
 hypervisor: kvm
@@ -11,7 +11,7 @@ private_ip_subnet: 172.16.0.0/16
 public_ip_subnet:  10.0.0.0/8
 
 public_ip_gw:  10.0.0.1
-public_ip_dns: 192.168.1.241
+public_ip_dns: 8.8.8.8
 
 ### Network device and config
 net_dev_default: enp1s0
@@ -29,6 +29,7 @@ vm_spec:
     private_ip:  "172.16.10.220"
     public_ip:   "10.0.0.220"
     storage:
+    - 2
     - 2
     - 2
     playbook: install.yaml

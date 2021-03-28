@@ -20,18 +20,21 @@ hmc             3600 IN  A     192.168.1.36  ; Hypervisor management console
 ;ca              3600 IN  CNAME ns1           ; Local CA
 
 ;; CICD Servers
-;harbor          3600 IN  A     10.0.0.221    ; Container Image Registry
-;gitlab          3600 IN  A     10.0.0.222    ; Code Repository
-;jenkins         3600 IN  A     10.0.0.223    ; CICD Server
+ca              3600 IN  A     10.0.0.220    ; CA Server
+harbor          3600 IN  A     10.0.0.221    ; Container Image Registry
+gitlab          3600 IN  A     10.0.0.222    ; Code Repository
+jenkins         3600 IN  A     10.0.0.223    ; CICD Server
+
 
 ;; CICD Server tiny env
-ca              3600 IN  A     192.168.1.220 ; CA Server
-harbor          3600 IN  A     192.168.1.221 ; Container Image Registry
-gitlab          3600 IN  A     192.168.1.222 ; Code Repository
-jenkins         3600 IN  A     192.168.1.223 ; CICD Server
+;ca              3600 IN  A     192.168.1.220 ; CA Server
+;harbor          3600 IN  A     192.168.1.221 ; Container Image Registry
+;gitlab          3600 IN  A     192.168.1.222 ; Code Repository
+;jenkins         3600 IN  A     192.168.1.223 ; CICD Server
 ldap            3600 IN  CNAME ca
 sso             3600 IN  CNAME ca
 ns1             3600 IN  CNAME ca
+oauth           3600 IN  CNAME ca
 
 ; Edge Nodes
 raspi07         3600 IN  A     192.168.1.241 ; Edge Node 1
@@ -45,5 +48,5 @@ svc3            3600 IN  CNAME igw3          ; Istio apl #2
 svc4            3600 IN  CNAME igw3          ; for Multilayer App
 
 ; OAuth Server
-oauth           3600 IN  A     10.0.2.83 
+;oauth           3600 IN  A     10.0.2.83 
 
