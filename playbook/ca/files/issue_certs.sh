@@ -51,7 +51,17 @@ export V3EXT=v3ext_sso.txt
 ./signature_cert.sh
 
 
-###
+### Ingress Controller
+export MY_HOST=ingress
+export CLUSTER_DOMAIN=k8s2
+export FQDN=$MY_HOST.$CLUSTER_DOMAIN.$MY_DOMAIN
+export CSR_SUBJ="/C=JP/ST=Tokyo/OU=Directory Service/O=Home Labo/CN=$FQDN"
+export V3EXT=v3ext.txt
+./create_csr_noip.sh
+./signature_cert.sh
+
+
+### Istio Ingress Gateway #1
 export MY_HOST=igw1
 export CLUSTER_DOMAIN=k8s2
 export FQDN=$MY_HOST.$CLUSTER_DOMAIN.$MY_DOMAIN
@@ -60,7 +70,7 @@ export V3EXT=v3ext.txt
 ./create_csr_noip.sh
 ./signature_cert.sh
 
-
+### Istio Ingress Gateway #2
 export MY_HOST=igw2
 export CLUSTER_DOMAIN=k8s2
 export FQDN=$MY_HOST.$CLUSTER_DOMAIN.$MY_DOMAIN
@@ -68,5 +78,4 @@ export CSR_SUBJ="/C=JP/ST=Tokyo/OU=Directory Service/O=Home Labo/CN=$FQDN"
 export V3EXT=v3ext.txt
 ./create_csr_noip.sh
 ./signature_cert.sh
-
 
