@@ -1,9 +1,12 @@
 # Marmot CoreDNS VM上でCoreDNSを構築するAnsibleプレイブック
 
-* CoreDNS
 * プライベート認証局
-* メールサーバー
-
+* プライベートドメインのDNSサーバー（CoreDNS）
+* LDAPサーバー
+* OIDC認証サーバー(Federated identity 環境)
+* Nginx (Virtual Host環境)
+* Docker & Docker-Compose 環境
+* メールサーバー labo.localドメイン(予定）
 
 
 ## 概要
