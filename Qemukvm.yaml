@@ -8,9 +8,9 @@ hypervisor: kvm
 
 ## Cluster Network
 private_ip_subnet: 172.16.0.0/16
-public_ip_subnet:  10.0.0.0/8
+public_ip_subnet:  192.168.1.0/24
 
-public_ip_gw:  10.0.0.1
+public_ip_gw:  192.168.1.1
 public_ip_dns: 8.8.8.8
 
 ### Network device and config
@@ -19,15 +19,16 @@ net_dev_private: enp2s0
 net_dev_public:  enp3s0
 
 cluster_name: core
-
+qcow2_image: ubuntu18.04.qcow2
+os_variant:  ubuntu18.04
 
 ### Virtual Machine Spec
 vm_spec:
   - name: "coredns"
     cpu: 1
     memory: 1024
-    private_ip:  "172.16.10.220"
-    public_ip:   "10.0.0.220"
+    private_ip:  "172.16.99.220"
+    public_ip:   "192.168.1.7"
     storage:
     - 2
     - 2
