@@ -26,9 +26,9 @@ os_variant:  ubuntu18.04
 vm_spec:
   - name: "coredns"
     cpu: 1
-    memory: 1024
+    memory: 2048
     private_ip:  "172.16.99.220"
-    public_ip:   "192.168.1.7"
+    public_ip:   "192.168.1.8"
     storage:
     - 2
     - 2
