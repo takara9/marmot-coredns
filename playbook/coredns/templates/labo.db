@@ -7,44 +7,35 @@ labo.local.	3600 IN SOA ns1.labo.local. root.labo.local. (
 				)
 
 ; Hypervisors
-hibiki          3600 IN  A     192.168.1.31
-akatsuki        3600 IN  A     192.168.1.32
-yukikaze        3600 IN  A     192.168.1.33  ; AMD
-nagato          3600 IN  A     192.168.1.34
-aoba            3600 IN  A     192.168.1.35  ; AMD
 hmc             3600 IN  A     192.168.1.36  ; Hypervisor management console
-
+hv1             3600 IN  A     10.1.0.11
+hv2             3600 IN  A     10.1.0.12
+hv3             3600 IN  A     10.1.0.13
+hv4             3600 IN  A     10.1.0.14
 
 ; Infra Servers
-;ns1             3600 IN  A     192.168.1.241 ; This server CoreDNS
-;ca              3600 IN  CNAME ns1           ; Local CA
-
-;; CICD Servers
-ca              3600 IN  A     10.0.0.220    ; CA Server
-harbor          3600 IN  A     10.0.0.221    ; Container Image Registry
-gitlab          3600 IN  A     10.0.0.222    ; Code Repository
-jenkins         3600 IN  A     10.0.0.223    ; CICD Server
-
-
-;; CICD Server tiny env
-;ca              3600 IN  A     192.168.1.220 ; CA Server
-;harbor          3600 IN  A     192.168.1.221 ; Container Image Registry
-;gitlab          3600 IN  A     192.168.1.222 ; Code Repository
-;jenkins         3600 IN  A     192.168.1.223 ; CICD Server
+ns1             3600 IN  A     192.168.1.8    ; This server CoreDNS
+ca              3600 IN  CNAME ns1           ; Local CA
 ldap            3600 IN  CNAME ca
 sso             3600 IN  CNAME ca
 ns1             3600 IN  CNAME ca
 oauth           3600 IN  CNAME ca
 
+;; CICD Servers
+harbor          3600 IN  A     192.168.1.221 ; Container Image Registry
+gitlab          3600 IN  A     192.168.1.222 ; Code Repository
+jenkins         3600 IN  A     192.168.1.223 ; CICD Server
+
+
 ; Edge Nodes
-raspi07         3600 IN  A     192.168.1.241 ; Edge Node 1
-raspi08         3600 IN  A     192.168.1.242 ; Edge Node 2
+;raspi07         3600 IN  A     192.168.1.241 ; Edge Node 1
+;raspi08         3600 IN  A     192.168.1.242 ; Edge Node 2
 
 ; Istio Ingress Gateway
-igw1            3600 IN  A     10.0.2.81
-igw2            3600 IN  A     10.0.2.82
-svc1            3600 IN  CNAME igw1          ; Istio apl #1
-svc2            3600 IN  CNAME igw2          ; Istio apl #2
-svc3            3600 IN  CNAME igw2          ; Istio apl #2
-svc4            3600 IN  CNAME igw2          ; for Multilayer App
+;igw1            3600 IN  A     10.0.2.81
+;igw2            3600 IN  A     10.0.2.82
+;svc1            3600 IN  CNAME igw1          ; Istio apl #1
+;svc2            3600 IN  CNAME igw2          ; Istio apl #2
+;svc3            3600 IN  CNAME igw2          ; Istio apl #2
+;svc4            3600 IN  CNAME igw2          ; for Multilayer App
 
