@@ -27,7 +27,7 @@ vm_spec:
   - name: "coredns"
     cpu: 1
     memory: 2048
-    private_ip:  "172.16.99.220"
+    private_ip:  "172.16.0.8"
     public_ip:   "192.168.1.8"
     storage:
     - 2
