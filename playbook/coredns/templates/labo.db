@@ -7,7 +7,7 @@ labo.local.	3600 IN SOA ns1.labo.local. root.labo.local. (
 				)
 
 ; Hypervisors
-hmc             3600 IN  A     192.168.1.36  ; Hypervisor management console
+hmc             3600 IN  A     192.168.1.9  ; Hypervisor management console
 hv1             3600 IN  A     10.1.0.11
 hv2             3600 IN  A     10.1.0.12
 hv3             3600 IN  A     10.1.0.13
@@ -25,6 +25,7 @@ oauth           3600 IN  CNAME ca
 harbor          3600 IN  A     192.168.1.221 ; Container Image Registry
 gitlab          3600 IN  A     192.168.1.222 ; Code Repository
 jenkins         3600 IN  A     192.168.1.223 ; CICD Server
+ceph            3600 IN  A     192.168.1.6   ; Ceph SDS
 
 
 ; Edge Nodes
