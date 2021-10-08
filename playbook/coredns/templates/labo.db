@@ -16,17 +16,17 @@ hv4             3600 IN  A     10.1.0.14
 ; Infra Servers
 ns1             3600 IN  A     192.168.1.8    ; This server CoreDNS
 ca              3600 IN  CNAME ns1           ; Local CA
-ldap            3600 IN  CNAME ca
-sso             3600 IN  CNAME ca
-ns1             3600 IN  CNAME ca
-oauth           3600 IN  CNAME ca
+ldap            3600 IN  CNAME ns1
+sso             3600 IN  CNAME ns1
+oauth           3600 IN  CNAME ns1
 
 ;; CICD Servers
 harbor          3600 IN  A     192.168.1.221 ; Container Image Registry
 gitlab          3600 IN  A     192.168.1.222 ; Code Repository
 jenkins         3600 IN  A     192.168.1.223 ; CICD Server
-ceph            3600 IN  A     192.168.1.6   ; Ceph SDS
-
+ceph            3600 IN  A     192.168.1.227 ; Ceph mon1..3
+                3600 IN  A     192.168.1.228 
+                3600 IN  A     192.168.1.229
 
 ; Edge Nodes
 ;raspi07         3600 IN  A     192.168.1.241 ; Edge Node 1
