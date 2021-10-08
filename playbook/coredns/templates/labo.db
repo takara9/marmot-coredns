@@ -27,6 +27,7 @@ jenkins         3600 IN  A     192.168.1.223 ; CICD Server
 ceph            3600 IN  A     192.168.1.227 ; Ceph mon1..3
                 3600 IN  A     192.168.1.228 
                 3600 IN  A     192.168.1.229
+objectstorage   3600 IN  CNAME ceph          ; Ceph Object Storage RADOSGW
 
 ; Edge Nodes
 ;raspi07         3600 IN  A     192.168.1.241 ; Edge Node 1
