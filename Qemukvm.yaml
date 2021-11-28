@@ -2,9 +2,21 @@
 # 最小構成のK8sクラスタ
 #
 domain: labo.local
+cluster_name: core
 
 ## Hypervisor type
 hypervisor: kvm
+
+## 仮想マシンイメージの設定
+##
+image_template_path: /home/images
+image_default_path: /stg1
+
+#qcow2_image: ubuntu18.04.qcow2
+#os_variant:  ubuntu18.04
+
+qcow2_image: ubuntu20.04-amd.qcow2
+os_variant:  ubuntu20.04
 
 ## Cluster Network
 private_ip_subnet: 172.16.0.0/16
@@ -18,9 +30,6 @@ net_dev_default: enp1s0
 net_dev_private: enp2s0
 net_dev_public:  enp3s0
 
-cluster_name: core
-qcow2_image: ubuntu18.04.qcow2
-os_variant:  ubuntu18.04
 
 ### Virtual Machine Spec
 vm_spec:
