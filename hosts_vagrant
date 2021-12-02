@@ -1,8 +1,0 @@
-coredns    ansible_connection=local
-
-[all:vars]
-
-# for Vagrant
-disk1 = /dev/sdc
-disk2 = /dev/sdd
-
