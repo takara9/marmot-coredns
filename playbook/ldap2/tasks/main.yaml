@@ -198,12 +198,12 @@
 #
 - name: change socket addr
   replace: >-
-    dest='/etc/php/7.2/fpm/pool.d/www.conf'
-    regexp='^listen = /run/php/php7.2-fpm.sock'
+    dest='/etc/php/7.4/fpm/pool.d/www.conf'
+    regexp='^listen = /run/php/php7.4-fpm.sock'
     replace='listen = 127.0.0.1:9000'
-- name: restart php7.2-fpm
+- name: restart php7.4-fpm
   systemd:
-    name: php7.2-fpm
+    name: php7.4-fpm
     state: restarted
     daemon_reload: yes
     enabled: yes
