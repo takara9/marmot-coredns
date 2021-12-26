@@ -2,7 +2,7 @@
 # 最小構成のK8sクラスタ
 #
 domain: labo.local
-cluster_name: core
+cluster_name: infra
 
 ## Hypervisor type
 hypervisor: kvm
