@@ -24,7 +24,7 @@
 - name: Download OpenLdap
   get_url:
     url:  https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.57.tgz
-    dest: "{{ my_ldap_data }}"
+    dest: "{{ fs_ldap }}"
     mode: 0440
 
 #
@@ -32,8 +32,8 @@
 #
 - name: Unarcvhice OpenLdap
   unarchive:
-    src:  "{{ my_ldap_data }}/openldap-2.4.57.tgz"
-    dest: "{{ my_ldap_data }}"
+    src:  "{{ fs_ldap }}/openldap-2.4.57.tgz"
+    dest: "{{ fs_ldap }}"
     owner: root
     group: root
     mode: '0755'
@@ -56,17 +56,17 @@
   shell: |
       ./configure --prefix=/ldap --enable-spasswd --enable-slapi --with-tls
   args:
-      chdir: "{{ my_ldap_data }}/openldap-2.4.57"
+      chdir: "{{ fs_ldap }}/openldap-2.4.57"
 - name: make depend
   shell: |
       make depend
   args:
-      chdir: "{{ my_ldap_data }}/openldap-2.4.57"
+      chdir: "{{ fs_ldap }}/openldap-2.4.57"
 - name: make install
   shell: |
       make install
   args:
-      chdir: "{{ my_ldap_data }}/openldap-2.4.57"
+      chdir: "{{ fs_ldap }}/openldap-2.4.57"
 - name: create symbolic link
   shell: |
      ls /ldap/bin > /tmp/ldap_command_list
@@ -145,6 +145,15 @@
   args:
     chdir: /ldap/ldif
 
+
+- name: copy org-unit-group.ldif
+  copy:
+    src:  org-unit-group.ldif
+    dest: /ldap/ldif/
+- command: ldapadd -x -w secret -D "cn=Manager,dc=labo,dc=local" -f org-unit-group.ldif
+  args:
+    chdir: /ldap/ldif
+
 - name: copy org-unit.ldif
   copy:
     src:  org-unit.ldif
@@ -152,6 +161,7 @@
 - command: ldapadd -x -w secret -D "cn=Manager,dc=labo,dc=local" -f org-unit.ldif
   args:
     chdir: /ldap/ldif
+
 
 - name: copy user1.ldif 
   copy:
@@ -178,6 +188,27 @@
     chdir: /ldap/ldif
 
 
+- name: copy linux group 
+  copy:
+    src:  org-unit-posix-grp.ldif
+    dest: /ldap/ldif/
+- command: ldapadd -x -w secret -D "cn=Manager,dc=labo,dc=local" -f org-unit-posix-grp.ldif
+  args:
+    chdir: /ldap/ldif
+
+- name: copy linux user 
+  copy:
+    src:  linux_user1.ldif
+    dest: /ldap/ldif/
+- command: ldapadd -x -w secret -D "cn=Manager,dc=labo,dc=local" -f linux_user1.ldif
+  args:
+    chdir: /ldap/ldif
+
+
+
+
+
+
 #########
 
 
@@ -190,7 +221,7 @@
     cd phpLDAPadmin/config
     cp config.php.example config.php
   args:
-      chdir: "{{ my_ldap_data }}"
+      chdir: "{{ fs_ldap }}"
 
 
 #
@@ -207,6 +238,3 @@
     state: restarted
     daemon_reload: yes
     enabled: yes
-
-
-

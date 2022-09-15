@@ -12,16 +12,24 @@
     fqdn:      "ca.labo.local"
     my_ipaddr: "{{ ansible_facts.enp0s9.ipv4.address }}"
     ca_ip:     "127.0.0.1"
-    my_dns_data: /coredns
-    disk_sdc: "{{ my_dns_data }}"
-    my_ca_data: /ca
-    disk_sdd: "{{ my_ca_data }}"
+    # my_dns_data: /coredns
+    # disk_dns: "{{ my_dns_data }}"
+    fs_dns: /coredns
+    # my_ca_data: /ca
+    # disk_ca:  "{{ my_ca_data }}"
+    fs_ca: /ca
     coredns_ver: 1.7.0
-    my_ldap_data: /ldap
-    disk_sde: "{{ my_ldap_data }}"
+    # my_ldap_data: /ldap
+    # disk_ldap: "{{ my_ldap_data }}"
+    fs_ldap: /ldap
+    # my_dex_data: /dex
+    # disk_dex: "{{ my_dex_data }}"
+    fs_dex: /dex
     admin_user: ubuntu
+    docker_version: 5:19.03.12~3-0~ubuntu-focal
   #
   roles:
+    - linux-setup  
     - vdisks
     - coredns
     - ca
@@ -29,5 +37,8 @@
     - ldap2
     - docker
     - mail-client
-        
+    - go-lang
+    - lam
+    - dex
+    
 

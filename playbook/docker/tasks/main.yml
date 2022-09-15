@@ -17,6 +17,7 @@
   vars:
     packages:
     - docker-ce{{ docker_version_ubuntu }}
+    - docker-compose
 
 - name: docker config
   template:

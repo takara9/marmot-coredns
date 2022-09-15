@@ -2,7 +2,7 @@
 # 最小構成のK8sクラスタ
 #
 domain: labo.local
-cluster_name: infra
+cluster_name: dev
 
 ## Hypervisor type
 hypervisor: kvm
@@ -34,11 +34,12 @@ net_dev_public:  enp3s0
 ### Virtual Machine Spec
 vm_spec:
   - name: "coredns"
-    cpu: 1
-    memory: 2048
-    private_ip:  "172.16.0.8"
-    public_ip:   "192.168.1.8"
+    cpu: 2
+    memory: 4096
+    private_ip:  "172.16.0.108"
+    public_ip:   "192.168.1.108"
     storage:
+    - 2
     - 2
     - 2
     - 2

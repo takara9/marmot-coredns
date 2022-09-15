@@ -7,51 +7,63 @@
     - rand
 
 
-- name: copy v3ext file to "{{ my_ca_data }}"
+#- name: copy v3ext file to "{{ my_ca_data }}"
+- name: copy v3ext file to "{{ fs_ca }}"
   copy:
     src:  v3ext_ca.txt
-    dest: "{{ my_ca_data }}"
+    #dest: "{{ my_ca_data }}"
+    dest: "{{ fs_ca }}"    
     owner: root
     group: root
     mode: '0755'
 
-- name: copy v3ext file to "{{ my_ca_data }}"
+#- name: copy v3ext file to "{{ my_ca_data }}"
+- name: copy v3ext file to "{{ fs_ca }}"
   copy:
     src:  v3ext_gitlab.txt
-    dest: "{{ my_ca_data }}"
+    #dest: "{{ my_ca_data }}"
+    dest: "{{ fs_ca }}"    
     owner: root
     group: root
     mode: '0755'
 
-- name: copy v3ext file to "{{ my_ca_data }}"
+#- name: copy v3ext file to "{{ my_ca_data }}"
+- name: copy v3ext file to "{{ fs_ca }}"
   copy:
     src:  v3ext_harbor.txt
-    dest: "{{ my_ca_data }}"
+    #dest: "{{ my_ca_data }}"
+    dest: "{{ fs_ca }}"    
     owner: root
     group: root
     mode: '0755'
 
-- name: copy v3ext file to "{{ my_ca_data }}"
+#- name: copy v3ext file to "{{ my_ca_data }}"
+- name: copy v3ext file to "{{ fs_ca }}"
   copy:
     src:  v3ext_jenkins.txt
-    dest: "{{ my_ca_data }}"
+    #dest: "{{ my_ca_data }}"
+    dest: "{{ fs_ca }}"    
     owner: root
     group: root
     mode: '0755'
 
 
-- name: copy v3ext file to "{{ my_ca_data }}"
+#- name: copy v3ext file to "{{ my_ca_data }}"
+- name: copy v3ext file to "{{ fs_ca }}"
   copy:
     src:  v3ext_ldap.txt
-    dest: "{{ my_ca_data }}"
+    #dest: "{{ my_ca_data }}"
+    dest: "{{ fs_ca }}"    
     owner: root
     group: root
     mode: '0755'
 
-- name: copy v3ext file to "{{ my_ca_data }}"
+#- name: copy v3ext file to "{{ my_ca_data }}"
+- name: copy v3ext file to "{{ fs_ca }}"
   copy:
     src:  v3ext_sso.txt
-    dest: "{{ my_ca_data }}"
+    #dest: "{{ my_ca_data }}"
+    dest: "{{ fs_ca }}"
     owner: root
     group: root
     mode: '0755'
@@ -61,7 +73,8 @@
 - name: copy ca files create_csr.sh
   copy:
     src: create_csr.sh
-    dest: "{{ my_ca_data }}"
+    #dest: "{{ my_ca_data }}"
+    dest: "{{ fs_ca }}"    
     owner: root
     group: root
     mode: '0755'
@@ -69,7 +82,8 @@
 - name: copy ca files create_csr.sh
   copy:
     src: create_csr_noip.sh
-    dest: "{{ my_ca_data }}"
+    #dest: "{{ my_ca_data }}"
+    dest: "{{ fs_ca }}"    
     owner: root
     group: root
     mode: '0755'
@@ -77,7 +91,8 @@
 - name: copy ca files environment
   copy:
     src: environment
-    dest: "{{ my_ca_data }}"
+    #dest: "{{ my_ca_data }}"
+    dest: "{{ fs_ca }}"    
     owner: root
     group: root
     mode: '0644'
@@ -85,7 +100,8 @@
 - name: copy issue_certs.sh
   copy:
     src: issue_certs.sh
-    dest: "{{ my_ca_data }}"
+    #dest: "{{ my_ca_data }}"
+    dest: "{{ fs_ca }}"    
     owner: root
     group: root
     mode: '0755'
@@ -93,7 +109,8 @@
 - name: copy setup_ca.sh
   copy:
     src: setup_ca.sh
-    dest: "{{ my_ca_data }}"    
+    #dest: "{{ my_ca_data }}"
+    dest: "{{ fs_ca }}"
     owner: root
     group: root
     mode: '0755'
@@ -101,7 +118,8 @@
 - name: copy signature_cert.sh
   copy:
     src: signature_cert.sh
-    dest: "{{ my_ca_data }}"        
+    #dest: "{{ my_ca_data }}"
+    dest: "{{ fs_ca }}"    
     owner: root
     group: root
     mode: '0755'
@@ -109,7 +127,8 @@
 - name: copy cp_ca_htdocs.sh
   copy:
     src: cp_ca_htdocs.sh
-    dest: "{{ my_ca_data }}"        
+    #dest: "{{ my_ca_data }}"
+    dest: "{{ fs_ca }}"
     owner: root
     group: root
     mode: '0755'
@@ -121,7 +140,8 @@
 - name: copy certs
   copy:
     src:  certs.tgz
-    dest: "{{ my_ca_data }}"        
+    #dest: "{{ my_ca_data }}"
+    dest: "{{ fs_ca }}"
     owner: root
     group: root
     mode: '0755'
@@ -129,13 +149,13 @@
 
 - name: check exits 
   stat:
-     path: "{{ my_ca_data }}/certs.tgz"
+     path: "{{ fs_ca }}/certs.tgz"
   register: certs_tgz
 
 - name: unarchive tar
   unarchive:
-    src:  "{{ my_ca_data }}/certs.tgz" 
-    dest: "{{ my_ca_data }}"
+    src:  "{{ fs_ca }}/certs.tgz" 
+    dest: "{{ fs_ca }}"
     owner: root
     group: root
     mode: '0755'
@@ -149,5 +169,5 @@
     ./issue_certs.sh
     #./cp_ca_htdocs.sh
   args:
-      chdir: "{{ my_ca_data }}"
+      chdir: "{{ fs_ca }}"
 ##  when: certs_tgz.stat.exists == false
