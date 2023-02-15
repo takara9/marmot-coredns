@@ -1,0 +1,59 @@
+#
+# 最小構成のK8sクラスタ
+#
+domain: labo.local
+cluster_name: dev
+
+## Hypervisor type
+hypervisor: kvm
+
+## 仮想マシンイメージの設定
+##
+image_template_path: /home/images
+image_default_path: /stg1
+
+#qcow2_image: ubuntu18.04.qcow2
+#os_variant:  ubuntu18.04
+
+qcow2_image: ubuntu20.04-amd.qcow2
+os_variant:  ubuntu20.04
+
+## Cluster Network
+private_ip_subnet: 172.16.0.0/16
+public_ip_subnet:  192.168.1.0/24
+
+public_ip_gw:  192.168.1.1
+public_ip_dns: 8.8.8.8
+
+### Network device and config
+net_dev_default: enp1s0
+net_dev_private: enp2s0
+net_dev_public:  enp3s0
+
+
+### Virtual Machine Spec
+vm_spec:
+  - name: "coredns"
+    cpu: 2
+    memory: 4096
+    private_ip:  "172.16.0.108"
+    public_ip:   "192.168.1.108"
+    storage:
+    - name: /dev/vdb
+      size: 2
+      path: /stg2
+    - name: /dev/vdc
+      size: 2
+      path: /stg2
+    - name: /dev/vdd
+      size: 2
+      path: /stg2
+    - name: /dev/vde
+      size: 2
+      path: /stg2
+    - name: /dev/vdf
+      size: 2
+      path: /stg2
+    playbook: install.yaml
+    comment: "Name Server"
+

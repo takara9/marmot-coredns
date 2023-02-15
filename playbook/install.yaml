@@ -25,6 +25,7 @@
     # my_dex_data: /dex
     # disk_dex: "{{ my_dex_data }}"
     fs_dex: /dex
+    fs_sso: /sso
     admin_user: ubuntu
     docker_version: 5:19.03.12~3-0~ubuntu-focal
   #

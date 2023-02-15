@@ -1,12 +1,13 @@
 #
 # プライベートCA証明書の取得
 #
-- name: Download CA pem
-  get_url:
-    url: "https://{{ public_ip_dns }}/ca.pem"
-    dest: /etc/ssl/certs/labo_local_ca.pem
-    validate_certs: no
-    mode: 0440
+### 2023/2/15 後で戻す
+###- name: Download CA pem
+###  get_url:
+###    url: "https://{{ public_ip_dns }}/ca.pem"
+###    dest: /etc/ssl/certs/labo_local_ca.pem
+###    validate_certs: no
+###    mode: 0440
 
 #
 # Ubuntu の 自動アップデートを禁止する
@@ -21,13 +22,13 @@
 #
 # DNSの設定を変更
 #
-#- name: set systemd-resolved config
-#  template:
-#    src: resolved.conf.j2
-#    dest: /etc/systemd/resolved.conf
-#    owner: root
-#    group: root
-#    mode: '0644'
+- name: set systemd-resolved config
+  template:
+    src: resolved.conf.j2
+    dest: /etc/systemd/resolved.conf
+    owner: root
+    group: root
+    mode: '0644'
 
 #
 # シンボリックリング /etc/resolv.conf を変更

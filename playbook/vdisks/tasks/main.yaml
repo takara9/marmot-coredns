@@ -84,3 +84,25 @@
     fstype: ext4
     state: mounted
 
+
+
+- name: mkfs ext4
+  filesystem:
+    fstype: ext4
+    dev: "{{ disk5 }}"
+
+- name: Create mount point
+  file:
+    path: "{{ fs_sso }}"
+    owner: root
+    group: root
+    mode: '2775'
+    state: directory
+    
+- name: Mount up device by {{ disk5 }}
+  mount:
+    path: "{{ fs_sso }}"
+    src:  "{{ disk5 }}"
+    fstype: ext4
+    state: mounted
+
