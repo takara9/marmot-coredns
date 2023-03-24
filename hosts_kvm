@@ -1,5 +1,5 @@
 #coredns     ansible_connection=local
-coredns      ansible_ssh_host=172.16.0.108  ansible_ssh_private_key_file=~/.ssh/id_rsa ansible_ssh_user=root
+coredns      ansible_ssh_host=172.16.0.8  ansible_ssh_private_key_file=~/.ssh/id_rsa ansible_ssh_user=root
 
 
 [all:vars]

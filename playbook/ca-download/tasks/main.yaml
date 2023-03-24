@@ -1,0 +1,11 @@
+#
+# プライベートCA証明書の取得
+#
+- name: Download CA pem
+  get_url:
+    url: "https://{{ public_ip_dns }}/ca.pem"
+    dest: /etc/ssl/certs/labo_local_ca.pem
+    validate_certs: no
+    mode: 0440
+
+
