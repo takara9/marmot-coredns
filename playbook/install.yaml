@@ -28,6 +28,12 @@
     fs_sso: /sso
     admin_user: ubuntu
     docker_version: 5:19.03.12~3-0~ubuntu-focal
+    disk1: /dev/vdb
+    disk2: /dev/vdc
+    disk3: /dev/vdd
+    disk4: /dev/vde
+    disk5: /dev/vdf
+
   #
   roles:
     - linux-setup  
