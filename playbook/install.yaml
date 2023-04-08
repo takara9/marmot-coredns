@@ -36,7 +36,7 @@
 
   #
   roles:
-    - linux-setup  
+    - linux-setup
     - vdisks
     - coredns
     - ca
@@ -47,5 +47,5 @@
     - go-lang
     - lam
     - dex
-    - ca-download 
+    - ca-download
 

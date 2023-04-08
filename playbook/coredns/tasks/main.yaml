@@ -18,7 +18,7 @@
     mode: '0444'
   when: file_coredns_tgz.stat.exists == false
 
-- name: Install coredns 
+- name: Install coredns
   unarchive:
     src: "/tmp/coredns_{{ coredns_ver }}_linux_amd64.tgz"
     dest: /usr/local/bin
@@ -26,8 +26,8 @@
     group: root
     mode: '0755'
     remote_src: yes
-  
-- name: copy coredns.service
+
+- name: copy coredns.sevice
   template:
     src: coredns.service.j2
     dest: /etc/systemd/system/coredns.service
@@ -51,7 +51,7 @@
     group: root
     mode: '0644'
 
-    
+
 - name: Stop dns proxy
   systemd:
     name: systemd-resolved
@@ -65,7 +65,7 @@
     owner: root
     group: root
     mode: '0644'
-    
+
 - name: Start Coredns deamons
   systemd:
     name: coredns
