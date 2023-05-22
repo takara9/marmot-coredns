@@ -36,18 +36,6 @@
 
   #
   roles:
-    - linux-setup
-    - vdisks
-    - coredns
-    - ca
-    - nginx
-    - ldap2
-    - docker
-    - mail-client
-    - go-lang
-    - lam
-    - dex
-    - ca-download
     - vault
 
 
