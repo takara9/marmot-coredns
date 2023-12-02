@@ -37,3 +37,14 @@ k8s4.labo.local:53 {
     errors
     forward . 172.16.4.31
 }
+
+
+a.labo.local {
+    etcd {
+        path /skydns
+        endpoint http://localhost:2379
+    }
+    errors
+    log
+}
+

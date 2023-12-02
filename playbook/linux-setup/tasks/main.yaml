@@ -86,11 +86,11 @@
     update_cache: yes
   register: apt_res
   retries: 5
-  until: apt_res is success    
+  until: apt_res is success
   vars:
     packages:
     - ruby
-    - ruby-bundler    
+    - ruby-bundler
     - emacs-nox
 
 #
@@ -157,7 +157,7 @@
 #    fstype: ext4
 #    dev: /dev/sdc
 #  when: sw_container_fs == True and ansible_facts.devices.sdc is defined
-    
+
 #- name: Create mount point for Vagrant
 #  file:
 #    path: /var/lib/containerd
@@ -184,7 +184,7 @@
 #    fstype: ext4
 #    dev: /dev/vdb
 #  when: sw_container_fs == True and ansible_facts.devices.vdb is defined
-    
+ 
 #- name: Create mount point for QEMU/KVM
 #  file:
 #    path: /var/lib/containerd
